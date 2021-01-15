@@ -5,11 +5,11 @@
     "build": "dune build @all"
   },
   "scripts": {
-    "start": "dune exec ./Hello.exe"
+    "start": "esy b dune exec ./Hello.exe"
   },
   "dependencies": {
     "@opam/dune": "2.7.1",
-    "ocaml": "4.11.x"
+    "ocaml": "4.10.x"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*"
