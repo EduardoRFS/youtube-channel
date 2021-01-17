@@ -1,5 +1,12 @@
 (executable
- (name Hello))
+ (name Hello)
+ (modes byte native))
+
+(rule
+ (alias run_hello_bc)
+ (deps Hello.bc)
+ (action
+  (run ./Hello.bc)))
 
 (rule
  (alias run_hello)
