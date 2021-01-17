@@ -6,7 +6,7 @@
   },
   "scripts": {
     "watch": "esy b dune build @run_hello_bc -w",
-    "start": "esy b dune build @run_hello"
+    "start": "esy b dune exec ./Hello.exe"
   },
   "dependencies": {
     "@opam/dune": "2.7.1",
