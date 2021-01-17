@@ -5,6 +5,7 @@
     "build": "dune build @all"
   },
   "scripts": {
+    "watch": "esy b dune build @run_hello -w",
     "start": "esy b dune exec ./Hello.exe"
   },
   "dependencies": {

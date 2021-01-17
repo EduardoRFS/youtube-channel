@@ -1,2 +1,8 @@
 (executable
  (name Hello))
+
+(rule
+ (alias run_hello)
+ (deps Hello.exe)
+ (action
+  (run ./Hello.exe)))
