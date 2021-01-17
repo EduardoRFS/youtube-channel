@@ -12,6 +12,7 @@
     "ocaml": "4.10.x"
   },
   "devDependencies": {
-    "@opam/ocaml-lsp-server": "*"
+    "@opam/ocaml-lsp-server": "*",
+    "esy-fswatch": "github:ulrikstrid/esy-fswatch:esy.json#7328e82b62c1691cd13623fffde0b66d0a0f9498"
   }
 }
