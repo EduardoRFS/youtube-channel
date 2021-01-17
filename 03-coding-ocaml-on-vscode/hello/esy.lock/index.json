@@ -1,5 +1,5 @@
 {
-  "checksum": "063c5d96fe9b956d0e74ebe142efec64",
+  "checksum": "8f9e2901b34ee16e06fb62b9d10ac548",
   "root": "hello@link-dev:./esy.json",
   "node": {
     "ocaml@4.10.2000@d41d8cd9": {
@@ -26,7 +26,7 @@
         "ocaml@4.10.2000@d41d8cd9", "@opam/dune@opam:2.7.1@baccb77f"
       ],
       "devDependencies": [
-        "esy-fswatch@archive:https://github.com/emcrisostomo/fswatch/releases/download/1.13.0/fswatch-1.13.0.tar.gz#sha1:c533fb6d9206814e12541282a76570412f65dc10@f1ebeee9",
+        "esy-fswatch@archive:https://github.com/emcrisostomo/fswatch/releases/download/1.13.0/fswatch-1.13.0.tar.gz#sha1:c533fb6d9206814e12541282a76570412f65dc10@9e33538b",
         "@opam/ocaml-lsp-server@opam:1.4.0@c9583433"
       ]
     },
@@ -46,9 +46,25 @@
       "dependencies": [],
       "devDependencies": []
     },
-    "esy-fswatch@archive:https://github.com/emcrisostomo/fswatch/releases/download/1.13.0/fswatch-1.13.0.tar.gz#sha1:c533fb6d9206814e12541282a76570412f65dc10@f1ebeee9": {
+    "esy-help2man@github:esy-packages/esy-help2man#c8e6931d1dcf58a81bd801145a777fd3b115c443@d41d8cd9": {
       "id":
-        "esy-fswatch@archive:https://github.com/emcrisostomo/fswatch/releases/download/1.13.0/fswatch-1.13.0.tar.gz#sha1:c533fb6d9206814e12541282a76570412f65dc10@f1ebeee9",
+        "esy-help2man@github:esy-packages/esy-help2man#c8e6931d1dcf58a81bd801145a777fd3b115c443@d41d8cd9",
+      "name": "esy-help2man",
+      "version":
+        "github:esy-packages/esy-help2man#c8e6931d1dcf58a81bd801145a777fd3b115c443",
+      "source": {
+        "type": "install",
+        "source": [
+          "github:esy-packages/esy-help2man#c8e6931d1dcf58a81bd801145a777fd3b115c443"
+        ]
+      },
+      "overrides": [],
+      "dependencies": [],
+      "devDependencies": []
+    },
+    "esy-fswatch@archive:https://github.com/emcrisostomo/fswatch/releases/download/1.13.0/fswatch-1.13.0.tar.gz#sha1:c533fb6d9206814e12541282a76570412f65dc10@9e33538b": {
+      "id":
+        "esy-fswatch@archive:https://github.com/emcrisostomo/fswatch/releases/download/1.13.0/fswatch-1.13.0.tar.gz#sha1:c533fb6d9206814e12541282a76570412f65dc10@9e33538b",
       "name": "esy-fswatch",
       "version":
         "archive:https://github.com/emcrisostomo/fswatch/releases/download/1.13.0/fswatch-1.13.0.tar.gz#sha1:c533fb6d9206814e12541282a76570412f65dc10",
@@ -59,9 +75,47 @@
         ]
       },
       "overrides": [
-        "esy.lock/overrides/f1ebeee9acc6d5c82f7b7c4ee3e1f762/esy.json"
+        "esy.lock/overrides/9e33538b8099037f322e2b5c7417a81c/windows.json"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "automake@github:esy-packages/esy-automake#f4fecab89169dd64cc363ec902d828c55c257fc0@d41d8cd9"
+      ],
+      "devDependencies": []
+    },
+    "automake@github:esy-packages/esy-automake#f4fecab89169dd64cc363ec902d828c55c257fc0@d41d8cd9": {
+      "id":
+        "automake@github:esy-packages/esy-automake#f4fecab89169dd64cc363ec902d828c55c257fc0@d41d8cd9",
+      "name": "automake",
+      "version":
+        "github:esy-packages/esy-automake#f4fecab89169dd64cc363ec902d828c55c257fc0",
+      "source": {
+        "type": "install",
+        "source": [
+          "github:esy-packages/esy-automake#f4fecab89169dd64cc363ec902d828c55c257fc0"
+        ]
+      },
+      "overrides": [],
+      "dependencies": [
+        "autoconf@github:esy-packages/esy-autoconf#ea58671a08c7ebf89b0cebd41f4950ca67157b01@d41d8cd9"
+      ],
+      "devDependencies": []
+    },
+    "autoconf@github:esy-packages/esy-autoconf#ea58671a08c7ebf89b0cebd41f4950ca67157b01@d41d8cd9": {
+      "id":
+        "autoconf@github:esy-packages/esy-autoconf#ea58671a08c7ebf89b0cebd41f4950ca67157b01@d41d8cd9",
+      "name": "autoconf",
+      "version":
+        "github:esy-packages/esy-autoconf#ea58671a08c7ebf89b0cebd41f4950ca67157b01",
+      "source": {
+        "type": "install",
+        "source": [
+          "github:esy-packages/esy-autoconf#ea58671a08c7ebf89b0cebd41f4950ca67157b01"
+        ]
+      },
+      "overrides": [],
+      "dependencies": [
+        "esy-help2man@github:esy-packages/esy-help2man#c8e6931d1dcf58a81bd801145a777fd3b115c443@d41d8cd9"
+      ],
       "devDependencies": []
     },
     "@opam/yojson@opam:1.7.0@7056d985": {

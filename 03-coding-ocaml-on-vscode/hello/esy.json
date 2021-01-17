@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*",
-    "esy-fswatch": "github:ulrikstrid/esy-fswatch:esy.json#7328e82b62c1691cd13623fffde0b66d0a0f9498"
+    "esy-fswatch": "github:ulrikstrid/esy-fswatch:windows.json#7328e82b62c1691cd13623fffde0b66d0a0f9498"
   }
 }
