@@ -1,0 +1,12 @@
+{
+  "name": "making-a-crud-in-ocaml",
+  "dependencies": {
+    "ocaml": "4.12.x",
+    "@opam/dune": "*",
+    "@opam/opium": "*"
+  },
+  "devDependencies": {
+    "@opam/ocaml-lsp-server": "*",
+    "@opam/ocamlformat": "*"
+  }
+}
