@@ -3,7 +3,9 @@
   "dependencies": {
     "ocaml": "4.12.x",
     "@opam/dune": "*",
-    "@opam/opium": "*"
+    "@opam/opium": "*",
+    "@opam/ppx_deriving_yojson": "*",
+    "@opam/yojson": "*"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*",
