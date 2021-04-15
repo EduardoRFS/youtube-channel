@@ -1,0 +1,11 @@
+(lang dune 2.8)
+
+(name encoding-hkt-in-ocaml)
+
+(generate_opam_files true)
+
+(package
+ (name encoding-hkt-in-ocaml)
+ (depends
+  (ocaml
+   (>= "4.08.0"))))
