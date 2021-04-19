@@ -6,6 +6,12 @@ depends: [
   "opium"
   "ppx_deriving_yojson"
   "yojson"
+  "uuidm"
+  "caqti"
+  "caqti-lwt"
+  "caqti-driver-postgresql"
+  "ppx_rapper"
+  "ppx_rapper_lwt"
   "odoc" {with-doc}
 ]
 build: [

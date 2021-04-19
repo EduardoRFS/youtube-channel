@@ -11,4 +11,10 @@
    (>= "4.08.0"))
   opium
   ppx_deriving_yojson
-  yojson))
+  yojson
+  uuidm
+  caqti
+  caqti-lwt
+  caqti-driver-postgresql
+  ppx_rapper
+  ppx_rapper_lwt))
