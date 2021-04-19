@@ -1,0 +1,14 @@
+{
+  "name": "using-postgres-with-ocaml",
+  "dependencies": {
+    "ocaml": "4.12.x",
+    "@opam/dune": "*",
+    "@opam/opium": "*",
+    "@opam/ppx_deriving_yojson": "*",
+    "@opam/yojson": "*"
+  },
+  "devDependencies": {
+    "@opam/ocaml-lsp-server": "*",
+    "@opam/ocamlformat": "*"
+  }
+}
