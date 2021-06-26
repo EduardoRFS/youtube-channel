@@ -84,3 +84,142 @@ module Interp = struct
         | VNative f -> f argument
         | VInt _ -> raise Type_error)
 end
+
+(* examples *)
+open Expr
+open Typ
+open Value
+open Infer
+open Interp
+
+let initial_value_context =
+  Context.empty
+  |> Context.add "print_hello_world"
+       (VNative
+          (fun v ->
+            print_endline "hello world";
+            v))
+
+let interp = interp initial_value_context
+
+let initial_typ_context =
+  Context.empty
+  |> Context.add "print_hello_world"
+       (TArrow { param_typ = TInt; body_typ = TInt })
+
+let infer = infer initial_typ_context
+
+(* (λa.λb.b) *)
+let snd =
+  Abstraction
+    {
+      param = "a";
+      param_typ = TInt;
+      body =
+        Abstraction
+          {
+            param = "b";
+            param_typ = TArrow { param_typ = TInt; body_typ = TInt };
+            body = Variable "b";
+          };
+    }
+
+let snd_typ = infer snd
+
+let rec forever_typ =
+  TArrow
+    {
+      param_typ = forever_typ;
+      body_typ =
+        TArrow
+          {
+            param_typ = TArrow { param_typ = TInt; body_typ = TInt };
+            body_typ = TArrow { param_typ = TInt; body_typ = TInt };
+          };
+    }
+
+let forever =
+  Abstraction
+    {
+      param = "forever";
+      param_typ = forever_typ;
+      body =
+        Abstraction
+          {
+            param = "f";
+            param_typ = TArrow { param_typ = TInt; body_typ = TInt };
+            body =
+              Abstraction
+                {
+                  param = "x";
+                  param_typ = TInt;
+                  body =
+                    Application
+                      {
+                        funct =
+                          Application
+                            {
+                              funct =
+                                Application
+                                  {
+                                    funct = Variable "forever";
+                                    argument = Variable "forever";
+                                  };
+                              argument =
+                                Application
+                                  {
+                                    funct =
+                                      Application
+                                        {
+                                          funct = Variable "snd";
+                                          argument =
+                                            Application
+                                              {
+                                                funct = Variable "f";
+                                                argument = Variable "x";
+                                              };
+                                        };
+                                    argument = Variable "f";
+                                  };
+                            };
+                        argument = Variable "x";
+                      };
+                };
+          };
+    }
+
+let forever =
+  Application
+    {
+      funct =
+        Abstraction
+          {
+            param = "snd";
+            param_typ = snd_typ;
+            body = Application { funct = forever; argument = forever };
+          };
+      argument = snd;
+    }
+
+let x = infer forever
+
+(*(λsnd.
+    ((λforever.λf.λx.forever forever (snd (f x) f) x))
+     (λforever.λf.λx.forever forever (snd (f x) f) x)))
+  (λ_.λb.b) *)
+(* let z = Application {
+  funct = forever;
+
+} *)
+
+let forever_hello_world =
+  Application
+    {
+      funct =
+        Application { funct = forever; argument = Variable "print_hello_world" };
+      argument = Int 1;
+    }
+
+let () = Format.printf "%a\n%!" Typ.pp_typ (infer forever_hello_world)
+
+let () = Format.printf "%a\n%!" Value.value_pp (interp forever_hello_world)
