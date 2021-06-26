@@ -1,0 +1,11 @@
+(lang dune 2.8)
+
+(name simple-typed-lambda-calculus-in-ocaml)
+
+(generate_opam_files true)
+
+(package
+ (name simple-typed-lambda-calculus-in-ocaml)
+ (depends
+  (ocaml
+   (>= "4.08.0"))))

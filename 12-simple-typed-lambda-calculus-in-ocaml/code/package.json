@@ -1,0 +1,11 @@
+{
+  "name": "simple-typed-lambda-calculus-in-ocaml",
+  "dependencies": {
+    "ocaml": "4.12.x",
+    "@opam/dune": "*"
+  },
+  "devDependencies": {
+    "@opam/ocaml-lsp-server": "*",
+    "@opam/ocamlformat": "*"
+  }
+}
