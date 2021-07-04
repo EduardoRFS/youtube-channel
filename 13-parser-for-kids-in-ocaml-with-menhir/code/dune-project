@@ -1,12 +1,13 @@
 (lang dune 2.8)
 
-(name simple-typed-lambda-calculus-in-ocaml)
+(name parser-for-kids-in-ocaml-with-menhir)
 
 (generate_opam_files true)
 
 (package
- (name simple-typed-lambda-calculus-in-ocaml)
+ (name parser-for-kids-in-ocaml-with-menhir)
  (depends
   (ocaml
    (>= "4.08.0"))
-  ppx_deriving))
+  ppx_deriving
+  menhir))

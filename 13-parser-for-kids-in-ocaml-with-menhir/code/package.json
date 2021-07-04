@@ -1,9 +1,10 @@
 {
-  "name": "simple-typed-lambda-calculus-in-ocaml",
+  "name": "parser-for-kids-in-ocaml-with-menhir",
   "dependencies": {
     "ocaml": "4.12.x",
     "@opam/dune": "*",
-    "@opam/ppx_deriving": "*"
+    "@opam/ppx_deriving": "*",
+    "@opam/menhir": "*"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*",
