@@ -1,0 +1,6 @@
+(executable
+ (name tuturulang)
+ (flags
+  (:standard -rectypes))
+ (preprocess
+  (pps ppx_deriving.show)))
