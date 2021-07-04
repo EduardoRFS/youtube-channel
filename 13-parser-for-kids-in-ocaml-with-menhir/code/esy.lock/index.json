@@ -1,10 +1,10 @@
 {
-  "checksum": "b4e1dad79eceb80c576229b52a3442fb",
-  "root": "simple-typed-lambda-calculus-in-ocaml@link-dev:./package.json",
+  "checksum": "3e8a19c390baf3fa8eb31404a9a713b0",
+  "root": "parser-for-kids-in-ocaml-with-menhir@link-dev:./package.json",
   "node": {
-    "simple-typed-lambda-calculus-in-ocaml@link-dev:./package.json": {
-      "id": "simple-typed-lambda-calculus-in-ocaml@link-dev:./package.json",
-      "name": "simple-typed-lambda-calculus-in-ocaml",
+    "parser-for-kids-in-ocaml-with-menhir@link-dev:./package.json": {
+      "id": "parser-for-kids-in-ocaml-with-menhir@link-dev:./package.json",
+      "name": "parser-for-kids-in-ocaml-with-menhir",
       "version": "link-dev:./package.json",
       "source": {
         "type": "link-dev",
@@ -13,7 +13,8 @@
       },
       "overrides": [],
       "dependencies": [
-        "ocaml@4.12.0@d41d8cd9", "@opam/ppx_deriving@opam:5.2.1@089e5dd3",
+        "ocaml@4.12.0@d41d8cd9", "@opam/sedlex@opam:2.3@20d8fda6",
+        "@opam/ppx_deriving@opam:5.2.1@089e5dd3",
         "@opam/menhir@opam:20210419@11c42419",
         "@opam/dune@opam:2.9.0@489e77a9"
       ],
@@ -321,6 +322,34 @@
         "ocaml@4.12.0@d41d8cd9", "@esy-ocaml/substs@0.0.1@d41d8cd9"
       ],
       "devDependencies": [ "ocaml@4.12.0@d41d8cd9" ]
+    },
+    "@opam/sedlex@opam:2.3@20d8fda6": {
+      "id": "@opam/sedlex@opam:2.3@20d8fda6",
+      "name": "@opam/sedlex",
+      "version": "opam:2.3",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/bc/bca8b8844d525f3f200d57fddfd2bcfa#md5:bca8b8844d525f3f200d57fddfd2bcfa",
+          "archive:https://github.com/ocaml-community/sedlex/archive/v2.3.tar.gz#md5:bca8b8844d525f3f200d57fddfd2bcfa"
+        ],
+        "opam": {
+          "name": "sedlex",
+          "version": "2.3",
+          "path": "esy.lock/opam/sedlex.2.3"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.12.0@d41d8cd9", "@opam/uchar@opam:0.0.2@c8218eea",
+        "@opam/ppxlib@opam:0.22.2@61009929", "@opam/gen@opam:0.5.3@4a903bee",
+        "@opam/dune@opam:2.9.0@489e77a9", "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.12.0@d41d8cd9", "@opam/uchar@opam:0.0.2@c8218eea",
+        "@opam/ppxlib@opam:0.22.2@61009929", "@opam/gen@opam:0.5.3@4a903bee",
+        "@opam/dune@opam:2.9.0@489e77a9"
+      ]
     },
     "@opam/result@opam:1.5@1c6a6533": {
       "id": "@opam/result@opam:1.5@1c6a6533",
@@ -849,6 +878,37 @@
         "@opam/dune@opam:2.9.0@489e77a9"
       ]
     },
+    "@opam/gen@opam:0.5.3@4a903bee": {
+      "id": "@opam/gen@opam:0.5.3@4a903bee",
+      "name": "@opam/gen",
+      "version": "opam:0.5.3",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/f2/f242db157222474b9715fef49a1259a4#md5:f242db157222474b9715fef49a1259a4",
+          "archive:https://github.com/c-cube/gen/archive/0.5.3.tar.gz#md5:f242db157222474b9715fef49a1259a4"
+        ],
+        "opam": {
+          "name": "gen",
+          "version": "0.5.3",
+          "path": "esy.lock/opam/gen.0.5.3"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.12.0@d41d8cd9",
+        "@opam/dune-configurator@opam:2.9.0@40e837e7",
+        "@opam/dune@opam:2.9.0@489e77a9",
+        "@opam/base-bytes@opam:base@19d0c2ff",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.12.0@d41d8cd9",
+        "@opam/dune-configurator@opam:2.9.0@40e837e7",
+        "@opam/dune@opam:2.9.0@489e77a9",
+        "@opam/base-bytes@opam:base@19d0c2ff"
+      ]
+    },
     "@opam/fpath@opam:0.7.3@674d8125": {
       "id": "@opam/fpath@opam:0.7.3@674d8125",
       "name": "@opam/fpath",
@@ -1167,6 +1227,28 @@
       "overrides": [],
       "dependencies": [ "@esy-ocaml/substs@0.0.1@d41d8cd9" ],
       "devDependencies": []
+    },
+    "@opam/base-bytes@opam:base@19d0c2ff": {
+      "id": "@opam/base-bytes@opam:base@19d0c2ff",
+      "name": "@opam/base-bytes",
+      "version": "opam:base",
+      "source": {
+        "type": "install",
+        "source": [ "no-source:" ],
+        "opam": {
+          "name": "base-bytes",
+          "version": "base",
+          "path": "esy.lock/opam/base-bytes.base"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.12.0@d41d8cd9", "@opam/ocamlfind@opam:1.9.1@b748edf6",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.12.0@d41d8cd9", "@opam/ocamlfind@opam:1.9.1@b748edf6"
+      ]
     },
     "@opam/base@opam:v0.14.1@9b424fee": {
       "id": "@opam/base@opam:v0.14.1@9b424fee",

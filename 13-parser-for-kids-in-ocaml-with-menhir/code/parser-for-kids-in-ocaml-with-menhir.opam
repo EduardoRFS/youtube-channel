@@ -5,6 +5,7 @@ depends: [
   "ocaml" {>= "4.08.0"}
   "ppx_deriving"
   "menhir"
+  "sedlex"
   "odoc" {with-doc}
 ]
 build: [
