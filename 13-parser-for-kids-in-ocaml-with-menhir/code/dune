@@ -2,5 +2,15 @@
  (name tuturulang)
  (flags
   (:standard -rectypes))
+ (libraries menhirLib sedlex)
  (preprocess
-  (pps ppx_deriving.show)))
+  (pps ppx_deriving.show sedlex.ppx)))
+
+(menhir
+ (modules parser))
+
+(rule
+ (alias runtuturu)
+ (deps ./tuturulang.exe)
+ (action
+  (run ./tuturulang.exe)))

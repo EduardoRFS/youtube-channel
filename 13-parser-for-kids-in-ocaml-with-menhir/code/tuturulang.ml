@@ -2,30 +2,6 @@ module Context = Map.Make (String)
 
 exception Type_error
 
-module Typ = struct
-  type typ = TArrow of { param_typ : typ; body_typ : typ } | TInt
-  [@@deriving show { with_path = false }]
-
-  let rec equal a b =
-    match (a, b) with
-    | a, b when a == b -> true
-    | TInt, TInt -> true
-    | ( TArrow { param_typ = param_a; body_typ = body_a },
-        TArrow { param_typ = param_b; body_typ = body_b } ) ->
-        equal param_a param_b && equal body_a body_b
-    | _ -> false
-end
-
-module Expr = struct
-  open Typ
-
-  type expr =
-    | Int of int
-    | Variable of string
-    | Abstraction of { param : string; param_typ : typ; body : expr }
-    | Application of { funct : expr; argument : expr }
-end
-
 module Infer = struct
   open Typ
   open Expr
@@ -85,141 +61,17 @@ module Interp = struct
         | VInt _ -> raise Type_error)
 end
 
-(* examples *)
-open Expr
-open Typ
-open Value
-open Infer
-open Interp
+let parse_expr = Lexer.from_string Parser.expr_opt
 
-let initial_value_context =
-  Context.empty
-  |> Context.add "print_hello_world"
-       (VNative
-          (fun v ->
-            print_endline "hello world";
-            v))
+let parse_typ = Lexer.from_string Parser.typ_opt
 
-let interp = interp initial_value_context
+let print_expr code =
+  parse_expr code |> Option.get |> Format.printf "%a\n%!" Expr.pp_expr
 
-let initial_typ_context =
-  Context.empty
-  |> Context.add "print_hello_world"
-       (TArrow { param_typ = TInt; body_typ = TInt })
+let print_typ code =
+  parse_expr code |> Option.get |> Infer.infer Context.empty
+  |> Format.printf "%a\n%!" Typ.pp_typ
 
-let infer = infer initial_typ_context
+let rec fix f = f (fix f)
 
-(* (λa.λb.b) *)
-let snd =
-  Abstraction
-    {
-      param = "a";
-      param_typ = TInt;
-      body =
-        Abstraction
-          {
-            param = "b";
-            param_typ = TArrow { param_typ = TInt; body_typ = TInt };
-            body = Variable "b";
-          };
-    }
-
-let snd_typ = infer snd
-
-let rec forever_typ =
-  TArrow
-    {
-      param_typ = forever_typ;
-      body_typ =
-        TArrow
-          {
-            param_typ = TArrow { param_typ = TInt; body_typ = TInt };
-            body_typ = TArrow { param_typ = TInt; body_typ = TInt };
-          };
-    }
-
-let forever =
-  Abstraction
-    {
-      param = "forever";
-      param_typ = forever_typ;
-      body =
-        Abstraction
-          {
-            param = "f";
-            param_typ = TArrow { param_typ = TInt; body_typ = TInt };
-            body =
-              Abstraction
-                {
-                  param = "x";
-                  param_typ = TInt;
-                  body =
-                    Application
-                      {
-                        funct =
-                          Application
-                            {
-                              funct =
-                                Application
-                                  {
-                                    funct = Variable "forever";
-                                    argument = Variable "forever";
-                                  };
-                              argument =
-                                Application
-                                  {
-                                    funct =
-                                      Application
-                                        {
-                                          funct = Variable "snd";
-                                          argument =
-                                            Application
-                                              {
-                                                funct = Variable "f";
-                                                argument = Variable "x";
-                                              };
-                                        };
-                                    argument = Variable "f";
-                                  };
-                            };
-                        argument = Variable "x";
-                      };
-                };
-          };
-    }
-
-let forever =
-  Application
-    {
-      funct =
-        Abstraction
-          {
-            param = "snd";
-            param_typ = snd_typ;
-            body = Application { funct = forever; argument = forever };
-          };
-      argument = snd;
-    }
-
-let x = infer forever
-
-(*(λsnd.
-    ((λforever.λf.λx.forever forever (snd (f x) f) x))
-     (λforever.λf.λx.forever forever (snd (f x) f) x)))
-  (λ_.λb.b) *)
-(* let z = Application {
-  funct = forever;
-
-} *)
-
-let forever_hello_world =
-  Application
-    {
-      funct =
-        Application { funct = forever; argument = Variable "print_hello_world" };
-      argument = Int 1;
-    }
-
-let () = Format.printf "%a\n%!" Typ.pp_typ (infer forever_hello_world)
-
-let () = Format.printf "%a\n%!" Value.value_pp (interp forever_hello_world)
+let () = print_typ "(λx:int -> int.x)"

@@ -1,5 +1,7 @@
 (lang dune 2.8)
 
+(using menhir 2.1)
+
 (name parser-for-kids-in-ocaml-with-menhir)
 
 (generate_opam_files true)
