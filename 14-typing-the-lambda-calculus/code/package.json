@@ -1,0 +1,14 @@
+{
+  "name": "parser-for-kids-in-ocaml-with-menhir",
+  "dependencies": {
+    "ocaml": "4.12.x",
+    "@opam/dune": "*",
+    "@opam/ppx_deriving": "*",
+    "@opam/menhir": "*",
+    "@opam/sedlex": "*"
+  },
+  "devDependencies": {
+    "@opam/ocaml-lsp-server": "*",
+    "@opam/ocamlformat": "*"
+  }
+}
