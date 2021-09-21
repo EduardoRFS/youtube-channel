@@ -23,7 +23,14 @@ let rec tokenizer buf =
   | "->" -> ARROW
   | '(' -> LPARENS
   | ')' -> RPARENS
-  | any -> if lexeme buf = "λ" then LAMBDA else raise Invalid_token
+  | '[' -> LBRACKET
+  | ']' -> RBRACKET
+  | any ->
+      let char = lexeme buf in
+      if char = "λ" then LAMBDA
+      else if char = "Λ" then ULAMBDA
+      else if char = "∀" then FORALL
+      else raise Invalid_token
   | eof -> EOF
   | _ -> assert false
 

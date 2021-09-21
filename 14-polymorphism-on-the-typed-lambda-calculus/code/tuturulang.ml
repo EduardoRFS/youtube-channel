@@ -25,6 +25,15 @@ module Infer = struct
           ->
             body_typ
         | _ -> raise Type_error)
+    | Type_abstraction { param; body } ->
+        let return_typ = infer context body in
+        TForall { param; return_typ }
+    | Type_application { funct; argument } -> (
+        let funct_typ = infer context funct in
+        match funct_typ with
+        | TForall { param; return_typ } ->
+            subst return_typ ~from:param ~to_:argument
+        | _ -> raise Type_error)
 end
 
 module Value = struct
@@ -33,6 +42,7 @@ module Value = struct
   type value =
     | VInt of int
     | VClosure of { context : value Context.t; param : string; body : expr }
+    | VForall of { context : value Context.t; body : expr }
     | VNative of (value -> value)
 
   let value_pp fmt value =
@@ -40,6 +50,7 @@ module Value = struct
     | VInt n -> Format.fprintf fmt "VInt %d" n
     | VClosure _ -> Format.fprintf fmt "VClosure"
     | VNative _ -> Format.fprintf fmt "VNative"
+    | VForall _ -> Format.fprintf fmt "VForall"
 end
 
 module Interp = struct
@@ -58,7 +69,12 @@ module Interp = struct
         | VClosure { context; param; body } ->
             interp (Context.add param argument context) body
         | VNative f -> f argument
-        | VInt _ -> raise Type_error)
+        | VInt _ | VForall _ -> raise Type_error)
+    | Type_abstraction { param = _; body } -> VForall { context; body }
+    | Type_application { funct; argument = _ } -> (
+        match interp context funct with
+        | VForall { context; body } -> interp context body
+        | VInt _ | VClosure _ | VNative _ -> raise Type_error)
 end
 
 let parse_expr = Lexer.from_string Parser.expr_opt
@@ -72,6 +88,20 @@ let print_typ code =
   parse_expr code |> Option.get |> Infer.infer Context.empty
   |> Format.printf "%a\n%!" Typ.pp_typ
 
-let rec fix f = f (fix f)
+let interp code =
+  parse_expr code |> Option.get
+  |> Interp.interp Context.empty
+  |> Format.printf "%a\n%!" Value.value_pp
 
-let () = print_typ "(λx:int -> int.x)"
+let () =
+  interp
+    {|
+      (Λbool.
+      λif:bool -> ∀a. a -> a -> a.
+      λv1:bool.
+      λv2:bool. if v1 [int] (if v2 [int] 1 2) 3)
+        [∀a.a -> a -> a]
+        (λbool:∀a.a -> a -> a.Λa.λleft:a.λright:a.bool [a] left right)
+        (Λa.λx:a.λy:a.x)
+        (Λa.λx:a.λy:a.x)
+    |}
